@@ -31,6 +31,7 @@ use App\Http\Controllers\FinanceActivityController;
 |--------------------------------------------------------------------------
 */
 
+//base function for management system
 Route::middleware(['auth'])->group(function () {
     Route::get('/debug_auth', function () {
         $user = auth()->user();
@@ -56,13 +57,10 @@ Route::middleware(['auth'])->group(function () {
             'user' => $user,
         ];
     });
-
     Route::get('/load_menu', [MenusController::class, 'index']);
     Route::prefix('notifications')->group(function () {
         Route::get('/', [NotificationController::class, 'getNotifications']);
     });
-
-
     Route::post('/notifications/mark-read', [NotificationController::class, 'markRead']);
     Route::post('/documents/route', [RoutingController::class, 'routeDocument']);
     Route::prefix('approvals')->group(function () {
@@ -71,13 +69,6 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::get('/notifications/stream', [NotificationController::class, 'stream']);
     Route::get('/OfficeDocs', [DocumentController::class, 'OfficeDocs']);
-
-
-
-
-
-
-
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index']);
         Route::get('/{id}', [UserController::class, 'show']);
@@ -88,11 +79,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/reactivate/{id}', [UserController::class, 'reactivate']);
         Route::get('/reports/{officename}', [UserController::class, 'reports']);
     });
-
-
     Route::post('/send-mail', [MailerController::class, 'send']);
-
-
     Route::prefix('nav_menus')->group(function () {
         Route::get('/list', [MenusController::class, 'menulist']);
         Route::post('/', [MenusController::class, 'store']);
@@ -100,9 +87,6 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/{id}', [MenusController::class, 'destroy']);
         Route::post('/swap', [MenusController::class, 'swapMenuOrder']);
     });
-
-
-
     Route::get('/roles', fn() => DB::table('setting_role')->get());
 
     Route::post('/test-api', function (Request $request) {

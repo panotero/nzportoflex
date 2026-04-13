@@ -21,17 +21,13 @@ class NavMenuSeeder extends Seeder
                 'link' => '/page_dashboard',
                 'allowed_roles' => json_encode(['1']),
                 'parent_menu' => '0',
-                'menu_order' => '0'
             ],
             [
-
                 'title' => 'User Management',
                 'icon' => 'fas fa-users',
                 'link' => '/page_users',
                 'allowed_roles' => json_encode(['1']),
                 'parent_menu' => '0',
-                'menu_order' => '1'
-
             ],
             [
                 'title' => 'Developer Option',
@@ -39,7 +35,6 @@ class NavMenuSeeder extends Seeder
                 'link' => '#',
                 'allowed_roles' => json_encode(['1']),
                 'parent_menu' => '0',
-                'menu_order' => '2'
             ],
             [
                 'title' => 'Mailer',
@@ -47,8 +42,6 @@ class NavMenuSeeder extends Seeder
                 'link' => '/page_mailer',
                 'allowed_roles' => json_encode(['1']),
                 'parent_menu' => 'Developer Option',
-                'menu_order' => '1'
-
             ],
             [
                 'title' => 'Menus',
@@ -56,59 +49,72 @@ class NavMenuSeeder extends Seeder
                 'link' => '/page_menus',
                 'allowed_roles' => json_encode(['1']),
                 'parent_menu' => 'Developer Option',
-                'menu_order' => '2'
-
             ]
         ];
 
-
-        //first lets saparate parent menu from child menu
-        $parent_menu = array_filter($menu_array, fn($menu) => $menu['parent_menu'] === '0');
-        // dd($parent_menu);
-        $child_menu = array_filter($menu_array, fn($menu) => $menu['parent_menu'] !== '0');
-
-
-        //in this section we need to create empty array to map the parent menu
+        // Separate parent and child
+        $parent_menu = array_values(array_filter($menu_array, fn($menu) => $menu['parent_menu'] === '0'));
+        $child_menu = array_values(array_filter($menu_array, fn($menu) => $menu['parent_menu'] !== '0'));
 
         $parentMap = [];
+        $parentOrder = 0;
 
-        //now lets insert first the parent to the database
+        // Insert parents with auto order
         foreach ($parent_menu as $menu) {
-            $parent = NavMenu::firstOrCreate([
-                'title' => $menu['title'],
-                'icon' => $menu['icon'],
-                'link' => $menu['link'],
-                'allowed_roles' => $menu['allowed_roles']
-            ]);
 
-            //lets save the id of the parent menu
-            $parentMap[$menu['title']] = $parent->id;
-        }
-
-        //now lets insert the child menu
-        foreach ($child_menu as $menu) {
-            //first lets specify the parent menu title
-            $parentMenuTitle = $menu['parent_menu'];
-
-            //now lets get the id from the parentMap
-
-            $parentId = $parentMap[$parentMenuTitle] ?? 0;
-
-            //now lets check if the parent title is available on the parent map
-            if ($parentId) {
-
-                $parent = NavMenu::firstOrCreate([
-                    'title' => $menu['title'],
+            $parent = NavMenu::firstOrCreate(
+                [
+                    'title' => $menu['title']
+                ],
+                [
                     'icon' => $menu['icon'],
                     'link' => $menu['link'],
                     'allowed_roles' => $menu['allowed_roles'],
-                    'parent_menu' => $parentId
-                ]);
-            } else {
-                //to handle the missing parent id
-                echo "skipped {$menu['title']} parent is not found on the array";
+                    'parent_menu' => 0,
+                    'menu_order' => $parentOrder
+                ]
+            );
+
+            // Save mapping
+            $parentMap[$menu['title']] = $parent->id;
+
+            // Increment parent order
+            $parentOrder++;
+        }
+
+        // Track child order per parent
+        $childOrderMap = [];
+
+        foreach ($child_menu as $menu) {
+
+            $parentTitle = $menu['parent_menu'];
+            $parentId = $parentMap[$parentTitle] ?? null;
+
+            if (!$parentId) {
+                echo "Skipped {$menu['title']} - parent not found\n";
+                continue;
             }
-            dump($parentMap);
+
+            // Initialize counter per parent
+            if (!isset($childOrderMap[$parentId])) {
+                $childOrderMap[$parentId] = 0;
+            }
+
+            $child = NavMenu::firstOrCreate(
+                [
+                    'title' => $menu['title'],
+                    'parent_menu' => $parentId
+                ],
+                [
+                    'icon' => $menu['icon'],
+                    'link' => $menu['link'],
+                    'allowed_roles' => $menu['allowed_roles'],
+                    'menu_order' => $childOrderMap[$parentId]
+                ]
+            );
+
+            // Increment child order per parent
+            $childOrderMap[$parentId]++;
         }
     }
 }
