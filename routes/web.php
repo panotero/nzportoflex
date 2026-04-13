@@ -27,7 +27,7 @@ Route::get('/login', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
 });
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('client.homepage');
 });
 Route::middleware(['auth', 'check.status', 'prevent-back-history'])->group(function () {
     Route::get('/dashboard', function () {
@@ -62,4 +62,8 @@ Route::middleware(['auth', 'check.status', 'prevent-back-history'])->group(funct
         Route::get('/', [NotificationController::class, 'getNotifications']);
     });
 });
+
+
+
+
 require __DIR__ . '/auth.php';
