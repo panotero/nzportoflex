@@ -18,7 +18,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gradient-to-br from-sky-400 via-cyan-300 to-blue-500 min-h-screen text-gray-800">
+<body class="bg-gradient-to-br bg-blue-950 dark:bg-gray-800 min-h-screen text-gray-800">
 
     <!-- Background Overlay Effects -->
     <div class="fixed inset-0 bg-black/20"></div>
@@ -31,13 +31,7 @@
 
             <!-- LEFT SIDE (Branding Panel) -->
             <div class="flex flex-col justify-center items-center p-10 text-white text-center space-y-6">
-
-                <div>
-
-                    <h1 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">
-                        Management System
-                    </h1>
-                </div>
+                <x-logo-button />
 
 
                 <p class="text-sm opacity-80 pt-4 max-w-xs">
@@ -59,6 +53,7 @@
                     <div class="bg-white rounded-xl shadow-lg px-6 py-6 border border-gray-100">
                         {{ $slot }}
                     </div>
+
 
                 </div>
             </div>

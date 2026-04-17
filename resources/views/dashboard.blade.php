@@ -7,9 +7,8 @@
            transform -translate-x-full lg:translate-x-0
            transition-transform duration-300
            z-40">
-            <div class="w-full p-5 dark:text-white">
-                <h1 class="font-semibold text-sm">Management System</h1>
-                <h1 class="text-md md:text-md font-bold"></h1>
+            <div class="w-full p-5 dark:text-white flex justify-center">
+                <x-logo-button />
             </div>
 
             <div class="w-full flex flex-col justify-between flex-grow">

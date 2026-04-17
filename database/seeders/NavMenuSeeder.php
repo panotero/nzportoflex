@@ -19,7 +19,7 @@ class NavMenuSeeder extends Seeder
                 'title' => 'Dashboard',
                 'icon' => 'fas fa-home',
                 'link' => '/page_dashboard',
-                'allowed_roles' => json_encode(['1']),
+                'allowed_roles' => json_encode(['1', '2', '3', '4']),
                 'parent_menu' => '0',
             ],
             [

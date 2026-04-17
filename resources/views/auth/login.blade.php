@@ -45,6 +45,11 @@
                 <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
             </label>
         </div>
+        <div class="w-full flex justify-between">
+            <a href="#" class="text-blue-700">Forgot Password</a>
+            <a href="/registration" class="text-blue-700">Sign up</a>
+
+        </div>
 
         <div class="flex items-center justify-end mt-4">
 

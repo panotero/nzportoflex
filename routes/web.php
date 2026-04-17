@@ -9,6 +9,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\MailerController;
 use App\Http\Middleware\CheckUserStatus;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\RegistrationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,33 @@ use App\Http\Controllers\NotificationController;
 Route::get('/login', function () {
     return auth()->check() ? redirect()->route('dashboard') : redirect()->route('login');
 });
-Route::get('/', function () {
-    return view('client.homepage');
+
+Route::get('/home', function () {
+    return view('client.home-page');
+})->name('home');
+Route::get('/registration', function () {
+    return auth()->check() ? redirect()->route('dashboard') : view('client.registration');
 });
+Route::get('/passwordreset', function () {
+    return auth()->check() ? redirect()->route('dashboard') : view('client.reset-password');
+});
+Route::get('/emailverify', function () {
+    return auth()->check() ? redirect()->route('dashboard') : view('client.verify-email');
+});
+Route::get('/forgotpassword', function () {
+    return auth()->check() ? redirect()->route('dashboard') : view('client.forgot-password');
+});
+Route::get('/', function () {
+    return redirect()->route("home");
+});
+Route::get('/contactus', function () {
+    return view('client.contactus');
+});
+
+
+
+
+
 Route::middleware(['auth', 'check.status', 'prevent-back-history'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
