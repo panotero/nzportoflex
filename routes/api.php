@@ -4,23 +4,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-
-use App\Http\Controllers\Api\MenuController;
 use App\Http\Controllers\MailerController;
 use App\Http\Controllers\MenusController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ListingController;
-use App\Http\Controllers\OfficeController;
-use App\Http\Controllers\UserConfigController;
 use App\Http\Controllers\DocumentController;
-use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RoutingController;
 use App\Http\Controllers\ApprovalsController;
-use App\Http\Controllers\FinanceController;
-use App\Http\Controllers\FinanceBudgetController;
-use App\Http\Controllers\FinanceActivityController;
+use App\Http\Controllers\HeadlineController;
+use App\Http\Controllers\SkillController;
+use App\Http\Controllers\ToolController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ContactController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -95,5 +91,61 @@ Route::middleware(['auth'])->group(function () {
             'success' => true,
             'message' => 'API successfully triggered!',
         ]);
+    });
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | HEADLINE
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('headline')->group(function () {
+        Route::get('/', [HeadlineController::class, 'index']);
+        Route::post('/', [HeadlineController::class, 'store']);
+        Route::put('/', [HeadlineController::class, 'update']);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | SKILLS
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('skills')->group(function () {
+        Route::get('/', [SkillController::class, 'index']);
+        Route::post('/', [SkillController::class, 'store']);
+        Route::put('/', [SkillController::class, 'update']);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | TOOLS
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('tools')->group(function () {
+        Route::get('/', [ToolController::class, 'index']);
+        Route::post('/', [ToolController::class, 'store']);
+        Route::put('/', [ToolController::class, 'update']);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | PROJECTS
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('projects')->group(function () {
+        Route::get('/', [ProjectController::class, 'index']);
+        Route::post('/', [ProjectController::class, 'store']);
+        Route::put('/', [ProjectController::class, 'update']);
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | CONTACT
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('contact')->group(function () {
+        Route::get('/', [ContactController::class, 'index']);
+        Route::post('/', [ContactController::class, 'store']);
+        Route::put('/', [ContactController::class, 'update']);
     });
 });

@@ -49,6 +49,9 @@ Route::get('/', function () {
 Route::get('/contactus', function () {
     return view('client.contactus');
 });
+Route::get('/portfolio/{name}', function () {
+    return view('client.portfolio');
+});
 
 
 
@@ -86,6 +89,9 @@ Route::middleware(['auth', 'check.status', 'prevent-back-history'])->group(funct
     Route::prefix('notifications')->group(function () {
         Route::get('/', [NotificationController::class, 'getNotifications']);
     });
+
+
+    Route::get('/page_portfolio', [PageController::class, 'page_portfolio']);
 });
 
 

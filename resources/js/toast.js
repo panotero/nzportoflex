@@ -5,7 +5,10 @@ function showMessage({
   duration = 5000,
 }) {
   const container = document.getElementById("globalMessageContainer");
-  if (!container) return;
+  if (!container) {
+    console.error("toast container not found");
+    return;
+  }
 
   const colors = {
     success: "bg-green-500",

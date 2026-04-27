@@ -115,4 +115,8 @@ class PageController extends Controller
     {
         return view('pages.reports');
     }
+    public function page_portfolio()
+    {
+        return view('pages.portfolio');
+    }
 }
