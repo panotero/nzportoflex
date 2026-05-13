@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const contentEl = document.getElementById("content");
     contentEl.innerHTML = `
-  <div class="w-full h-96 overflow-auto border rounded-md p-2">
+  <div class="w-full h-96 overflow-auto rounded-md p-2">
     <div class="mx-auto w-full rounded-md p-4 animate-pulse mt-4 min-w-max">
       <div class="w-full flex space-x-4">
         <div class="h-10 w-10 rounded-full bg-gray-200"></div>

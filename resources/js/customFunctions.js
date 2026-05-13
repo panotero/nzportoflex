@@ -1,3 +1,32 @@
+const AutoReload = {
+  timeout: null,
+  inactivityTime: 3 * 60 * 1000, // 3 minutes
+
+  init() {
+    this.resetTimer();
+
+    //detect user activity
+    ["mousemove", "mousedown", "keypress", "touchstart", "scroll"].forEach(
+      (event) => {
+        document.addEventListener(event, () => {
+          this.resetTimer();
+        });
+      },
+    );
+  },
+
+  resetTimer() {
+    clearTimeout(this.timeout);
+
+    this.timeout = setTimeout(() => {
+      location.reload();
+    }, this.inactivityTime);
+  },
+};
+
+//initialize
+AutoReload.init();
+
 window.initModal = function initModal({ modalId }) {
   const modal = document.getElementById(modalId);
   const closeBtn = modal?.querySelectorAll(".modal-close");

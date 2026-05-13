@@ -16,6 +16,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ToolController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PortfolioController;
 
 
 /*
@@ -93,6 +94,13 @@ Route::middleware(['auth'])->group(function () {
         ]);
     });
 
+
+    //get all  portfolio data
+    Route::prefix('portfolio')->group(
+        function () {
+            Route::get('/', [PortfolioController::class, 'index']);
+        }
+    );
 
     /*
     |--------------------------------------------------------------------------
