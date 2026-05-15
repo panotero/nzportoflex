@@ -104,7 +104,7 @@
                 <button id="tools-save" class="hidden save-btn">Save</button>
             </div>
 
-            <div id="tools-list" class="space-y-3">
+            <div id="tools-list" class="grid grid-cols-1 md:grid-cols-4 gap-4">
             </div>
 
             <button id="add-tool" class="add-btn w-full mt-4">+ Add tool</button>
@@ -118,7 +118,8 @@
                 <button id="projects-save" class="hidden save-btn">Save</button>
             </div>
 
-            <div id="projects-list" class="grid grid-cols-1 gap-3"></div>
+            <div id="projects-list" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            </div>
 
             <button id="add-project" class="add-btn w-full mt-4">+ Add project</button>
         </div>
@@ -199,12 +200,64 @@
             return el;
         }
 
-        function addToolRow() {
+        function addToolRow(tool = false) {
 
             const el = document.createElement('div');
             el.className = "p-4 border rounded-lg bg-slate-50 dark:bg-slate-800";
 
-            el.innerHTML = `
+            let toolHTML = ``;
+            if (tool) {
+
+                toolHTML = `
+
+                    <div class="p-photos-wrapper">
+
+    <label class="block text-xs font-medium text-slate-500 mb-2">
+        Project Image
+    </label>
+
+    <div class="relative w-full">
+
+        <!-- Upload Card -->
+        <div class="upload-box flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl cursor-pointer hover:border-slate-400 dark:hover:border-slate-500 transition text-center bg-slate-50 dark:bg-slate-900">
+
+            <!-- Preview Image -->
+            <img class="preview absolute inset-0 w-full h-full object-cover rounded-xl" src="${tool.logo}"/>
+
+            <!-- Placeholder -->
+            <div class="placeholder flex flex-col items-center justify-center text-slate-400 hidden">
+                <svg class="w-8 h-8 mb-2 opacity-70" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path d="M3 16l5-5a2 2 0 012.828 0L15 15l3-3a2 2 0 012.828 0L21 13"></path>
+                    <path d="M14 10h.01"></path>
+                </svg>
+                <p class="text-xs">Click to upload image</p>
+            </div>
+
+            <!-- Hidden Input -->
+            <input type="file" accept="image/*" class="logo-input absolute inset-0 opacity-0 cursor-pointer">
+
+        </div>
+
+        <!-- Remove Button -->
+        <button type="button" class="remove-btn hidden absolute top-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-md hover:bg-black">
+            Remove
+        </button>
+
+    </div>
+</div>
+            <input type="hidden" class="tool-id" name="toolID" value="${tool.id}">
+            <input type="hidden"  class="tool-logo" name="toolLogo" value="${tool.logo}">
+
+                    <label for="skillTitle">Tool Name</label>
+                <input class="tool-title input w-full mb-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Tool name" value="${tool.title}">
+                    <label for="skillTitle">Tool Description</label>
+                <input class="tool-desc input w-full mb-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description" value="${tool.description}">
+                    <label for="skillTitle">Years of Experience</label>
+                <input class="tool-years input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Years of experience" value="${tool.years_experience}">
+            `
+            } else {
+
+                toolHTML = `
 
                     <div class="p-photos-wrapper">
 
@@ -249,21 +302,54 @@
                 <input class="tool-years input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Years of experience">
             `;
 
-            el.querySelectorAll('input').forEach(i =>
-                i.addEventListener('input', () => saveBtn.classList.remove('hidden'))
-            );
+            }
+
+
+            el.innerHTML = toolHTML;
+            el.querySelectorAll('input').forEach(i => {
+
+                const eventType = i.type === 'file' ? 'change' : 'input';
+
+                i.addEventListener(eventType, () => {
+                    document.getElementById('tools-save').classList.remove('hidden');
+                });
+
+            });
+
+            const uploadWrapper = el.querySelector('.p-photos-wrapper');
+            initImageUpload(uploadWrapper, '.logo-input');
             return el;
         }
 
-        function addProjectRow() {
+        function addProjectRow(project = false) {
 
             const el = document.createElement('div');
-            el.className = "p-4 border rounded-lg bg-slate-50 dark:bg-slate-800 space-y-2";
 
-            el.innerHTML = `
+            let projectHTML = ``;
+            if (project) {
+                projectHTML = `
+                <input class="p-title input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Project title" value="${project.title}">
+                <input class="p-duration input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Duration" value="${project.duration}">
+                <textarea class="p-desc input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description" rows=8 >${project.description}</textarea>
+                <input class="p-link input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Project link" value="${project.project_url}">
+
+                <select class="p-type input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" value="${project.url_type}">Select Link Type
+                    <option value="video">Video</option>
+                    <option value="website">Website</option>
+                    <option value="drive">Drive</option>
+                </select>
+                <select class="p-skill input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" value="${project.skills}">Select Skill Associated
+                    <option value="1">videography</option>
+                    <option value="2">Web Development</option>
+                </select>
+
+                <input type="file" multiple class="p-photos input w-full">
+            `;
+            } else {
+                projectHTML = `
                 <input class="p-title input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Project title">
                 <input class="p-duration input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Duration">
-                <textarea class="p-desc input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description"></textarea>
+                <textarea class="p-desc input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description" rows=8></textarea>
                 <input class="p-link input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Project link">
 
                 <select class="p-type input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none">Select Link Type
@@ -278,8 +364,14 @@
 
                 <input type="file" multiple class="p-photos input w-full">
             `;
+            }
+
+            el.className = "p-4 border rounded-lg bg-slate-50 dark:bg-slate-800 space-y-2";
+
+            el.innerHTML = projectHTML;
             el.querySelectorAll('input, textarea, select').forEach(i =>
-                i.addEventListener('input', () => saveBtn.classList.remove('hidden'))
+                i.addEventListener('input', () => document.getElementById('projects-save').classList.remove(
+                    'hidden'))
             );
             return el;
         }
@@ -422,8 +514,6 @@
                     const ToolRow = addToolRow();
                     list.appendChild(ToolRow);
 
-                    const uploadWrapper = el.querySelector('.p-photos-wrapper');
-                    initImageUpload(uploadWrapper, '.logo-input');
                     saveBtn.classList.remove('hidden');
 
 
@@ -435,6 +525,15 @@
                     document.querySelectorAll('#tools-list > div').forEach((card, index) => {
                         const logoInput = card.querySelector('.logo-input');
 
+                        formData.append(
+                            `tools[${index}][id]`,
+                            card.querySelector('.tool-id')?.value || ""
+                        );
+
+                        formData.append(
+                            `tools[${index}][logo]`,
+                            card.querySelector('.tool-logo')?.value || ""
+                        );
                         formData.append(`tools[${index}][title]`, card.querySelector(
                             '.tool-title').value);
                         formData.append(`tools[${index}][desc]`, card.querySelector(
@@ -650,8 +749,27 @@
                 }
 
                 //foreach tools
+                if (tools) {
+
+                    const list = document.getElementById('tools-list');
+                    tools.forEach(tool => {
+
+                        const toolRow = addToolRow(tool);
+                        list.appendChild(toolRow);
+                    });
+                }
 
                 //foreach projects
+                if (projects) {
+
+                    const list = document.getElementById('projects-list');
+                    projects.forEach(project => {
+
+                        const projectRow = addProjectRow(project);
+                        list.appendChild(projectRow);
+
+                    });
+                }
             }
             document.getElementById("mainContainer").classList.remove("hidden");
             document.getElementById("loaderContainer").classList.add("hidden");

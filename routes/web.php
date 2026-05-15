@@ -9,6 +9,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\MailerController;
 use App\Http\Middleware\CheckUserStatus;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\RegistrationController;
 
 /*
@@ -93,6 +94,8 @@ Route::middleware(['auth', 'check.status', 'prevent-back-history'])->group(funct
 
     Route::get('/page_portfolio', [PageController::class, 'page_portfolio']);
 });
+
+Route::get('/shared/portfolio/{uuid}', [PortfolioController::class, 'shared']);
 
 
 

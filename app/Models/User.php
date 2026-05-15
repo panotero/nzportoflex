@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -62,22 +64,29 @@ class User extends Authenticatable
     {
         return $this->belongsTo(SettingRole::class, 'role_id');
     }
-    public function office()
+
+    public function headlines(): HasMany
     {
-        return $this->belongsTo(Office::class, 'office_id', 'office_id');
+        return $this->hasMany(Headline::class, 'user_id');
     }
 
-
-    public function userConfig()
+    public function contacts(): HasMany
     {
-
-        return $this->belongsTo(UserConfig::class, 'role_id', 'id');
-    }
-    public function documents()
-    {
-
-        return $this->hasMany(Document::class, 'recipient_id', 'id');
+        return $this->hasMany(Contact::class, 'user_id');
     }
 
-    public function user_designation() {}
+    public function skills(): HasMany
+    {
+        return $this->hasMany(Skill::class, 'user_id');
+    }
+
+    public function tools(): HasMany
+    {
+        return $this->hasMany(Tool::class, 'user_id');
+    }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class, 'user_id');
+    }
 }

@@ -17,12 +17,13 @@ class ToolController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->file('tools'));
+        // dd($request->all());
 
         $userId = auth()->id();
 
         $tools = $request->input('tools', []);
         $files = $request->file('tools', []);
+        // dd($files);
         return $this->service->saveAll($userId, $tools, $files);
     }
 

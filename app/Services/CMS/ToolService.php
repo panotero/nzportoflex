@@ -15,15 +15,42 @@ class ToolService
     {
         return Tool::where('user_id', $userId)->get();
     }
-
     public function saveAll($userId, $tools, $files)
     {
-        Tool::where('user_id', $userId)->delete();
-
+        $savedIds = [];
         $created = [];
+
         foreach ($tools as $index => $tool) {
 
-            $imageUrl = null;
+            $toolId = $tool['id'] ?? null;
+
+            /*
+        |--------------------------------------------------------------------------
+        | FIND EXISTING
+        |--------------------------------------------------------------------------
+        */
+
+            $existing = null;
+
+            if ($toolId) {
+                $existing = Tool::where('id', $toolId)
+                    ->where('user_id', $userId)
+                    ->first();
+            }
+
+            /*
+        |--------------------------------------------------------------------------
+        | DEFAULT EXISTING LOGO
+        |--------------------------------------------------------------------------
+        */
+
+            $imageUrl = $existing->logo ?? null;
+
+            /*
+        |--------------------------------------------------------------------------
+        | CHECK FILE INPUT
+        |--------------------------------------------------------------------------
+        */
 
             if (!empty($files[$index]['logo'] ?? null)) {
 
@@ -35,15 +62,54 @@ class ToolService
                 $imageUrl = $uploaded[0] ?? null;
             }
 
-            $created[] = Tool::create([
-                'logo' => $imageUrl,
+            /*
+        |--------------------------------------------------------------------------
+        | UPDATE
+        |--------------------------------------------------------------------------
+        */
+
+            if ($existing) {
+
+                $existing->update([
+                    'logo' => $imageUrl,
+                    'title' => $tool['title'] ?? null,
+                    'description' => $tool['desc'] ?? null,
+                    'years_experience' => $tool['years'] ?? null,
+                ]);
+
+                $savedIds[] = $existing->id;
+                $created[] = $existing;
+
+                continue;
+            }
+
+            /*
+        |--------------------------------------------------------------------------
+        | CREATE
+        |--------------------------------------------------------------------------
+        */
+
+            $newTool = Tool::create([
                 'user_id' => $userId,
+                'logo' => $imageUrl,
                 'title' => $tool['title'] ?? null,
                 'description' => $tool['desc'] ?? null,
                 'years_experience' => $tool['years'] ?? null,
             ]);
+
+            $savedIds[] = $newTool->id;
+            $created[] = $newTool;
         }
 
+        /*
+    |--------------------------------------------------------------------------
+    | DELETE REMOVED
+    |--------------------------------------------------------------------------
+    */
+
+        Tool::where('user_id', $userId)
+            ->whereNotIn('id', $savedIds)
+            ->delete();
 
         return response()->json([
             'success' => true,

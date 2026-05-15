@@ -8,6 +8,7 @@ use App\Models\Contact;
 use App\Models\Skill;
 use App\Models\Tool;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class PortfolioController extends Controller
@@ -38,5 +39,12 @@ class PortfolioController extends Controller
         ];
         return $portfolioData;
     }
-    public function preview($uuid) {}
+    public function shared($uuid)
+    {
+        if (!$uuid) return;
+        //get userinfo of uuid
+        $user =  User::where('uuid', $uuid)->firstOrFail();
+        $portfolioData = $this->getinfo($user->id);
+        return $portfolioData;
+    }
 }

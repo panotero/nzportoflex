@@ -1,6 +1,6 @@
 const AutoReload = {
   timeout: null,
-  inactivityTime: 3 * 60 * 1000, // 3 minutes
+  inactivityTime: 10 * 60 * 1000, // 3 minutes
 
   init() {
     this.resetTimer();
