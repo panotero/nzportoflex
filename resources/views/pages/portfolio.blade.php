@@ -19,67 +19,104 @@
 
 
     <div class="container mx-auto px-4 space-y-6 hidden" id="mainContainer">
-
         <div id="headline-section"
-            class="bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
+            class="section-card bg-white dark:bg-slate-900 p-6 rounded-xl shadow-sm border border-slate-100 dark:border-slate-800">
 
-            <div class="flex justify-between mb-5">
+            <!-- Header -->
+            <div class="flex justify-between items-start mb-5">
+
                 <div>
-                    <h2 class="text-lg font-semibold text-slate-900 dark:text-white">Headline</h2>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">
+                    <h2 class="text-sm font-semibold text-slate-900 dark:text-white">
+                        Headline
+                    </h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
                         The first thing visitors read.
                     </p>
                 </div>
 
-                <!-- Save button (hidden initially) -->
                 <button id="headline-save-btn"
                     class="hidden px-5 py-2 rounded-lg bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 text-sm font-medium active:scale-95 transition">
                     Save
                 </button>
-            </div>
-
-            <div class="space-y-4">
-                <input id="headline-main"
-                    class="headline-input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
-                    placeholder="Main headline" />
-
-                <input id="headline-sub"
-                    class="headline-input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
-                    placeholder="Sub headline" />
-
-                <input id="headline-cta"
-                    class="headline-input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
-                    placeholder="CTA label" />
-
 
             </div>
-            <div class="flex justify-between my-5 ">
-                <h2>Background</h2>
+
+            <!-- Headline Fields -->
+            <label class="block text-xs font-medium text-slate-500 mb-1">
+                Main Headline
+            </label>
+            <input id="headline-main"
+                class="headline-input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+                placeholder="Main headline">
+
+            <label class="block text-xs font-medium text-slate-500 mb-1">
+                Sub Headline
+            </label>
+            <input id="headline-sub"
+                class="headline-input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+                placeholder="Sub headline">
+
+            <label class="block text-xs font-medium text-slate-500 mb-1">
+                CTA Label
+            </label>
+            <input id="headline-cta"
+                class="headline-input w-full mb-4 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+                placeholder="CTA label">
+
+            <!-- Background Section -->
+            <div class="mb-3">
+                <h3 class="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                    Background
+                </h3>
             </div>
 
             <textarea id="bg-text"
-                class="headline-input input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
-                rows="4"></textarea>
+                class="headline-input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+                rows="4" placeholder="Background text..."></textarea>
+
         </div>
 
         {{-- CONTACTS --}}
         <div id="contact-section"
             class="section-card bg-white dark:bg-slate-900 p-6 shadow-sm border border-slate-100 dark:border-slate-800">
-            <div class="flex justify-between mb-5">
-                <h2>Contact</h2>
-                <button id="contact-save" class="hidden save-btn">Save</button>
+
+            <!-- Header -->
+            <div class="flex justify-between items-center mb-5">
+                <h2 class="text-sm font-semibold text-slate-700 dark:text-slate-200">
+                    Contact
+                </h2>
+
+                <button id="contact-save" class="hidden save-btn">
+                    Save
+                </button>
             </div>
 
+            <!-- Email -->
+            <label class="block text-xs font-medium text-slate-500 mb-1">
+                Email
+            </label>
             <input id="contact-email"
-                class="input w-full mb-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+                class="input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
                 placeholder="Email">
+
+            <!-- Phone -->
+            <label class="block text-xs font-medium text-slate-500 mb-1">
+                Phone
+            </label>
             <input id="contact-phone"
-                class="input w-full mb-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+                class="input w-full mb-4 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
                 placeholder="Phone">
 
-            <div id="social-list" class="space-y-2"></div>
+            <!-- Social Section -->
+            <label class="block text-xs font-medium text-slate-500 mb-2">
+                Social Links
+            </label>
 
-            <button id="add-social" class="add-btn w-full mt-2">+ Add social</button>
+            <div id="social-list" class="space-y-3"></div>
+
+            <button id="add-social" class="add-btn w-full mt-3">
+                + Add social
+            </button>
         </div>
 
 
@@ -171,25 +208,29 @@
 
             const el = document.createElement('div');
             let skillsHTML = ``;
-            if (skills) {
+            const isEdit = !!skills;
 
-                skillsHTML = `
-                <label for="skillTitle">Skill Title</label>
+            const skillId = skills?.id || "";
+            const title = skills?.title || "";
+            const description = skills?.description || "";
 
-        <input type="hidden" name="skillID" value="${skills.id}">
-                <input id="skillTitle" class="skill-title input w-full mb-2  border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"  value="${skills.title}" placeholder="Skill title">
-                <label for="skillDesccription">Skill Desccription</label>
-                <input id="skillDesccription" class="skill-desc input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description" value="${skills?.descriiption || ""}">
-            `;
-            } else {
+            skillsHTML = `
+<input type="hidden" name="skillID" value="${skillId}">
 
-                skillsHTML = `
-                <label for="skillTitle">Skill Title</label>
-                <input id="skillTitle" class="skill-title input w-full mb-2  border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Skill title">
-                <label for="skillDesccription">Skill Desccription</label>
-                <input id="skillDesccription" class="skill-desc input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description">
-            `;
-            }
+<label class="block text-xs font-medium text-slate-500 mb-1">Skill Title</label>
+<input
+    class="skill-title input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Skill title"
+    value="${title}"
+>
+
+<label class="block text-xs font-medium text-slate-500 mb-1">Description</label>
+<input
+    class="skill-desc input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Description"
+    value="${description}"
+>
+`;
             el.className = "p-4 border rounded-lg bg-slate-50 dark:bg-slate-800";
 
             el.innerHTML = skillsHTML;
@@ -206,15 +247,18 @@
             el.className = "p-4 border rounded-lg bg-slate-50 dark:bg-slate-800";
 
             let toolHTML = ``;
-            if (tool) {
+            const isEdit = !!tool;
 
-                toolHTML = `
+            const logoSrc = tool?.logo || "";
+            const title = tool?.title || "";
+            const description = tool?.description || "";
+            const years = tool?.years_experience || "";
+            const id = tool?.id || "";
 
-                    <div class="p-photos-wrapper">
+            toolHTML = `
+<label class="block text-xs font-medium text-slate-500 mb-1">Tool Image</label>
 
-    <label class="block text-xs font-medium text-slate-500 mb-2">
-        Project Image
-    </label>
+<div class="p-photos-wrapper mb-3">
 
     <div class="relative w-full">
 
@@ -222,10 +266,13 @@
         <div class="upload-box flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl cursor-pointer hover:border-slate-400 dark:hover:border-slate-500 transition text-center bg-slate-50 dark:bg-slate-900">
 
             <!-- Preview Image -->
-            <img class="preview absolute inset-0 w-full h-full object-cover rounded-xl" src="${tool.logo}"/>
+            <img
+                class="preview absolute inset-0 w-full h-full object-cover rounded-xl ${logoSrc ? '' : 'hidden'}"
+                src="${logoSrc}"
+            />
 
             <!-- Placeholder -->
-            <div class="placeholder flex flex-col items-center justify-center text-slate-400 hidden">
+            <div class="placeholder flex flex-col items-center justify-center text-slate-400 ${logoSrc ? 'hidden' : ''}">
                 <svg class="w-8 h-8 mb-2 opacity-70" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
                     <path d="M3 16l5-5a2 2 0 012.828 0L15 15l3-3a2 2 0 012.828 0L21 13"></path>
                     <path d="M14 10h.01"></path>
@@ -245,64 +292,31 @@
 
     </div>
 </div>
-            <input type="hidden" class="tool-id" name="toolID" value="${tool.id}">
-            <input type="hidden"  class="tool-logo" name="toolLogo" value="${tool.logo}">
 
-                    <label for="skillTitle">Tool Name</label>
-                <input class="tool-title input w-full mb-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Tool name" value="${tool.title}">
-                    <label for="skillTitle">Tool Description</label>
-                <input class="tool-desc input w-full mb-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description" value="${tool.description}">
-                    <label for="skillTitle">Years of Experience</label>
-                <input class="tool-years input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Years of experience" value="${tool.years_experience}">
-            `
-            } else {
+<input type="hidden" class="tool-id" value="${id}">
+<input type="hidden" class="tool-logo" value="${logoSrc}">
 
-                toolHTML = `
+<label class="block text-xs font-medium text-slate-500 mb-1">Tool Name</label>
+<input
+    class="tool-title input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Tool name"
+    value="${title}"
+>
 
-                    <div class="p-photos-wrapper">
+<label class="block text-xs font-medium text-slate-500 mb-1">Description</label>
+<input
+    class="tool-desc input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Description"
+    value="${description}"
+>
 
-    <label class="block text-xs font-medium text-slate-500 mb-2">
-        Project Image
-    </label>
-
-    <div class="relative w-full">
-
-        <!-- Upload Card -->
-        <div class="upload-box flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl cursor-pointer hover:border-slate-400 dark:hover:border-slate-500 transition text-center bg-slate-50 dark:bg-slate-900">
-
-            <!-- Preview Image -->
-            <img class="preview hidden absolute inset-0 w-full h-full object-cover rounded-xl" />
-
-            <!-- Placeholder -->
-            <div class="placeholder flex flex-col items-center justify-center text-slate-400">
-                <svg class="w-8 h-8 mb-2 opacity-70" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path d="M3 16l5-5a2 2 0 012.828 0L15 15l3-3a2 2 0 012.828 0L21 13"></path>
-                    <path d="M14 10h.01"></path>
-                </svg>
-                <p class="text-xs">Click to upload image</p>
-            </div>
-
-            <!-- Hidden Input -->
-            <input type="file" accept="image/*" class="logo-input absolute inset-0 opacity-0 cursor-pointer">
-
-        </div>
-
-        <!-- Remove Button -->
-        <button type="button" class="remove-btn hidden absolute top-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-md hover:bg-black">
-            Remove
-        </button>
-
-    </div>
-</div>
-                    <label for="skillTitle">Tool Name</label>
-                <input class="tool-title input w-full mb-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Tool name">
-                    <label for="skillTitle">Tool Description</label>
-                <input class="tool-desc input w-full mb-2 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description">
-                    <label for="skillTitle">Years of Experience</label>
-                <input class="tool-years input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Years of experience">
-            `;
-
-            }
+<label class="block text-xs font-medium text-slate-500 mb-1">Years of Experience</label>
+<input
+    class="tool-years input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Years of experience"
+    value="${years}"
+>
+`;
 
 
             el.innerHTML = toolHTML;
@@ -326,45 +340,58 @@
             const el = document.createElement('div');
 
             let projectHTML = ``;
-            if (project) {
-                projectHTML = `
-                <input class="p-title input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Project title" value="${project.title}">
-                <input class="p-duration input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Duration" value="${project.duration}">
-                <textarea class="p-desc input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description" rows=8 >${project.description}</textarea>
-                <input class="p-link input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Project link" value="${project.project_url}">
+            const title = project?.title || "";
+            const duration = project?.duration || "";
+            const desc = project?.description || "";
+            const link = project?.project_url || "";
+            const type = project?.url_type || "";
+            const skill = project?.skills || "";
 
-                <select class="p-type input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" value="${project.url_type}">Select Link Type
-                    <option value="video">Video</option>
-                    <option value="website">Website</option>
-                    <option value="drive">Drive</option>
-                </select>
-                <select class="p-skill input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" value="${project.skills}">Select Skill Associated
-                    <option value="1">videography</option>
-                    <option value="2">Web Development</option>
-                </select>
+            projectHTML = `
+<label class="block text-xs font-medium text-slate-500 mb-1">Project Title</label>
+<input
+    class="p-title input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Project title"
+    value="${title}"
+>
 
-                <input type="file" multiple class="p-photos input w-full">
-            `;
-            } else {
-                projectHTML = `
-                <input class="p-title input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Project title">
-                <input class="p-duration input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Duration">
-                <textarea class="p-desc input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Description" rows=8></textarea>
-                <input class="p-link input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none" placeholder="Project link">
+<label class="block text-xs font-medium text-slate-500 mb-1">Duration</label>
+<input
+    class="p-duration input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Duration"
+    value="${duration}"
+>
 
-                <select class="p-type input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none">Select Link Type
-                    <option value="video">Video</option>
-                    <option value="website">Website</option>
-                    <option value="drive">Drive</option>
-                </select>
-                <select class="p-skill input w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none">Select Skill Associated
-                    <option value="1">videography</option>
-                    <option value="2">Web Development</option>
-                </select>
+<label class="block text-xs font-medium text-slate-500 mb-1">Description</label>
+<textarea
+    class="p-desc input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Description"
+    rows="8"
+>${desc}</textarea>
 
-                <input type="file" multiple class="p-photos input w-full">
-            `;
-            }
+<label class="block text-xs font-medium text-slate-500 mb-1">Project Link</label>
+<input
+    class="p-link input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none"
+    placeholder="Project link"
+    value="${link}"
+>
+
+<label class="block text-xs font-medium text-slate-500 mb-1">Link Type</label>
+<select class="p-type input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none">
+    <option value="video" ${type === "video" ? "selected" : ""}>Video</option>
+    <option value="website" ${type === "website" ? "selected" : ""}>Website</option>
+    <option value="drive" ${type === "drive" ? "selected" : ""}>Drive</option>
+</select>
+
+<label class="block text-xs font-medium text-slate-500 mb-1">Associated Skill</label>
+<select class="p-skill input w-full mb-3 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 rounded-lg px-4 py-2 text-sm focus:border-slate-400 outline-none">
+    <option value="1" ${skill == 1 ? "selected" : ""}>Videography</option>
+    <option value="2" ${skill == 2 ? "selected" : ""}>Web Development</option>
+</select>
+
+<label class="block text-xs font-medium text-slate-500 mb-1">Project Files</label>
+<input type="file" multiple class="p-photos input w-full">
+`;
 
             el.className = "p-4 border rounded-lg bg-slate-50 dark:bg-slate-800 space-y-2";
 
@@ -388,8 +415,8 @@
             }
 
 
-            el.addEventListener('input', () => saveBtn.classList.remove('hidden'));
-            saveBtn.classList.remove('hidden');
+            el.addEventListener('input', () => document.getElementById('contact-save').classList.remove('hidden'));
+            document.getElementById('contact-save').classList.remove('hidden');
 
             return el;
         }
